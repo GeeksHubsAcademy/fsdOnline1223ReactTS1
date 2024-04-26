@@ -30,3 +30,9 @@ export interface CustomInput {
     value: string | undefined,
     onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
 }
+
+export interface CustomButton {
+    title: string,
+    design: string,
+    onClick: () => void;
+}

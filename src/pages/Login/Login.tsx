@@ -2,18 +2,31 @@ import { useState } from "react";
 import { Credentials } from "../../interfaces";
 import "./Login.css";
 import { CInput } from "../../common/CInput/CInput";
+import { CButton } from "../../common/CButton/CButton";
+import { logMeIn } from "../../services/apiCalls";
 
 export const Login: React.FC = () => {
   const [credenciales, setCredenciales] = useState<Credentials>({
     email: "",
     password: "",
   });
+  const [msgError, setMsgError] = useState<string>("");
 
   const InputHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setCredenciales((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
+  };
+
+  const LogMe = async (): Promise<void> => {
+    const fetched = await logMeIn(credenciales);
+
+    if(!fetched.success){
+        setMsgError(fetched.message)
+    }else{
+        setMsgError("")
+    }
   };
 
   return (
@@ -35,6 +48,8 @@ export const Login: React.FC = () => {
         value={credenciales.password || ""}
         onChange={InputHandler}
       />
+      <CButton title={"Log me"} design={"button-design"} onClick={LogMe} />
+      {msgError}
     </div>
   );
 };

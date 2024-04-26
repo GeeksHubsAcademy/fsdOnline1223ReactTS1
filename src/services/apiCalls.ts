@@ -1,4 +1,4 @@
-import { CharactersFetchedResults, DataFetched } from "../interfaces";
+import { CharactersFetchedResults, Credentials, DataFetched } from "../interfaces";
 
 const root: string = "https://rickandmortyapi.com/api/";
 
@@ -24,3 +24,34 @@ export const bringCharacters = async (): Promise<DataFetched> => {
     return answer;
   }
 };
+
+export const logMeIn = async (credentials: Credentials): Promise<DataFetched> => {
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(credentials),
+  };
+  
+  try {
+    const response: any = await fetch(`http://localhost:4000/api/auth/login`, options);
+    
+    const data: DataFetched = await response.json();
+
+    if(!data.success){
+      throw new Error(data.message)
+    }
+
+    return data;
+  } catch (error: any) {
+    let answer: DataFetched = {
+      message: error.message,
+      data: [],
+      success: false,
+    };
+    return answer;
+  }
+
+}
