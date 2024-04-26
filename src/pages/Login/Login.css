@@ -1,0 +1,13 @@
+
+.login-view-design{
+
+    height: 100vh;
+    width: 100vw;
+
+    background-color: beige;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

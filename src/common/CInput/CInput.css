@@ -1,0 +1,11 @@
+
+.input-design {
+
+    border: 0.2em blue solid;
+    border-radius: 0.2em;
+
+    height: 2.5em;
+    width: 20em;
+
+    margin: 1em;
+}

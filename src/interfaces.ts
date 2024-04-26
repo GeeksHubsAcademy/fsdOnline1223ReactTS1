@@ -16,3 +16,17 @@ export interface ResultsInfo {
     next: string | null,
     prev: string | null
 }
+
+export interface Credentials {
+    email: string,
+    password: string
+}
+
+export interface CustomInput {
+    type: string,
+    name: string,
+    design: string,
+    placeholder: string,
+    value: string | undefined,
+    onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
+}
