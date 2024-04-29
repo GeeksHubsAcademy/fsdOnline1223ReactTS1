@@ -5,6 +5,11 @@ const root: string = "https://rickandmortyapi.com/api/";
 export const bringCharacters = async (): Promise<DataFetched> => {
   try {
     const response: any = await fetch(`${root}character/?page=2`);
+
+    if(!response.ok){
+      throw new Error(`Error ${response.status}: Problem encountered retrieving data`)
+    }
+
     const dirtyData: CharactersFetchedResults = await response.json();
 
     const data: DataFetched = {
@@ -14,13 +19,12 @@ export const bringCharacters = async (): Promise<DataFetched> => {
     };
 
     return data;
-  } catch (error) {
-    let answer: DataFetched = {
+  } catch (error: any) {
+    const answer: DataFetched = {
       success: false,
-      message: "Problem encountered retrieving data",
+      message: error.message,
       data: [],
     };
-
     return answer;
   }
 };

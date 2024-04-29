@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Credentials } from "../../interfaces";
-import "./Login.css";
 import { CInput } from "../../common/CInput/CInput";
 import { CButton } from "../../common/CButton/CButton";
 import { logMeIn } from "../../services/apiCalls";
+import { Credentials, DataFetched } from "../../interfaces";
+import "./Login.css";
 
 export const Login: React.FC = () => {
   const [credenciales, setCredenciales] = useState<Credentials>({
@@ -20,12 +20,11 @@ export const Login: React.FC = () => {
   };
 
   const LogMe = async (): Promise<void> => {
-    const fetched = await logMeIn(credenciales);
-
-    if(!fetched.success){
-        setMsgError(fetched.message)
-    }else{
-        setMsgError("")
+    const fetched: DataFetched = await logMeIn(credenciales);
+    if (!fetched.success) {
+      setMsgError(fetched.message);
+    } else {
+      setMsgError("");
     }
   };
 
